@@ -1,10 +1,12 @@
 import telebot
 from telebot import types
 import requests
+from googletrans import Translator
 
 bot = telebot.TeleBot('TOKEN_BOT')
 
 user_states = {}
+translator = Translator()
 
 @bot.message_handler(commands=['start'])
 def send_welcome(message):
@@ -20,7 +22,7 @@ def create_image(message):
     if message.text.lower() == "создать изображение":
         user_id = message.from_user.id
         user_states[user_id] = 'waiting_text'
-        bot.send_message(message.chat.id, "Введите текст для генерации изображения(на английском языке):")
+        bot.send_message(message.chat.id, "Введите текст для генерации изображения(на любом языке):")
     else:
         bot.send_message(message.chat.id, "Пожалуйста, нажмите кнопку 'Создать изображение' для начала.")
 
@@ -29,10 +31,11 @@ def generate_image(message):
     api_url = 'https://clipdrop-api.co/text-to-image/v1'
     api_key = 'API_KEY'
 
-    prompt = message.text
+    text_to_translate = message.text
+    translated_text = translator.translate(text_to_translate, src='auto', dest='en').text
 
     headers = {'x-api-key': api_key}
-    files = {'prompt': (None, prompt)}
+    files = {'prompt': (None, translated_text)}
 
     response = requests.post(api_url, headers=headers, files=files)
 
