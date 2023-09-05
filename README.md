@@ -3,7 +3,4 @@
 Замените "TOKEN_BOT" строка 6. На свой токен бота в телеграмм. Cоздать бота и token можно здесь https://t.me/BotFather
 Замените "API_KEY" строка 32. Создать его можно здесь https://clipdrop.co/apis
 ```shell
-pip install pyTelegramBotAPI
-pip install requests
-pip install googletrans==4.0.0-rc1
-
+pip install pyTelegramBotAPI requests googletrans googletrans==4.0.0-rc1
