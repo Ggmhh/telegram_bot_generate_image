@@ -22,7 +22,7 @@ def create_image(message):
     if message.text.lower() == "создать изображение":
         user_id = message.from_user.id
         user_states[user_id] = 'waiting_text'
-        bot.send_message(message.chat.id, "Введите текст для генерации изображения(на любом языке):")
+        bot.send_message(message.chat.id, "Введите текст для генерации изображения:")
     else:
         bot.send_message(message.chat.id, "Пожалуйста, нажмите кнопку 'Создать изображение' для начала.")
 
